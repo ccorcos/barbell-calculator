@@ -42,24 +42,11 @@ export function App() {
 			<h2>Barbell Calculator</h2>
 
 			<p>
-				<strong>Barbell Weight:</strong>{" "}
-				<select
-					value={barWeight}
-					onChange={(e) => {
-						setBarWeight(parseInt(e.target.value))
-					}}
-				>
-					<option value={15}>15</option>
-					<option value={35}>35</option>
-					<option value={45}>45</option>
-				</select>
-			</p>
-			<p>
 				<strong>Total:</strong> {totalWeight}
 			</p>
 
 			<div>
-				<Barbell weight={barWeight}>
+				<Barbell barWeight={barWeight} setBarWeight={setBarWeight}>
 					{plates.map((weight, i) => (
 						<PlateSide weight={weight} onClick={removePlate(i)} />
 					))}
@@ -84,14 +71,14 @@ const maxPlateRadius = 200
 const barColor = "#444"
 
 function Barbell({
-	weight,
+	barWeight,
+	setBarWeight,
 	children,
 }: {
-	weight: number
+	barWeight: number
+	setBarWeight: any
 	children: JSX.Element
 }) {
-	// const thickness =
-
 	// 15 * m + b = 16
 	// 45 * m + b = 24
 
@@ -104,7 +91,7 @@ function Barbell({
 	const m = (high - low) / (45 - 15)
 	const b = low - 15 * m
 
-	const barThickness = weight * m + b
+	const barThickness = barWeight * m + b
 	console.log(m, b)
 
 	const stopThickness = 3.0 * barThickness
@@ -122,7 +109,8 @@ function Barbell({
 					background: barColor,
 				}}
 			></div>
-			<label
+
+			<div
 				style={{
 					position: "absolute",
 					top: graphicHeight / 2 - stopThickness / 2,
@@ -135,8 +123,26 @@ function Barbell({
 					lineHeight: 2,
 				}}
 			>
-				{weight}
-			</label>
+				{barWeight}
+			</div>
+			<select
+				value={barWeight}
+				onChange={(e) => {
+					setBarWeight(parseInt(e.target.value))
+				}}
+				style={{
+					position: "absolute",
+					top: graphicHeight / 2 - stopThickness / 2,
+					left: stopWidth,
+					width: stopWidth,
+					height: stopThickness,
+					opacity: 0,
+				}}
+			>
+				<option value={15}>15</option>
+				<option value={35}>35</option>
+				<option value={45}>45</option>
+			</select>
 			<div
 				style={{
 					display: "flex",

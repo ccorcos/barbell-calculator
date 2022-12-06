@@ -6,6 +6,7 @@ const watch = process.argv.includes("--watch")
 const cmd = watch ? "watch" : "copy"
 cpx[cmd](path("src/app/index.html"), path("build"))
 cpx[cmd](path("src/app/index.css"), path("build"))
+cpx[cmd](path("src/app/icon.png"), path("build"))
 
 build({
 	entry: path("src/app/index.tsx"),
