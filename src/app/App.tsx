@@ -35,7 +35,8 @@ export function App() {
 		setPlates((list) => list.filter((_, i) => i !== index))
 	}
 
-	const totalWeight = plates.reduce((a, b) => a + b, barWeight)
+	const plateWeight = plates.reduce((a, b) => a + b, 0) * 2
+	const totalWeight = barWeight + plateWeight
 
 	return (
 		<div>
