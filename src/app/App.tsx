@@ -140,6 +140,7 @@ function Barbell({
 					opacity: 0,
 				}}
 			>
+				<option value={0}>0</option>
 				<option value={15}>15</option>
 				<option value={35}>35</option>
 				<option value={45}>45</option>
